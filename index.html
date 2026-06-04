@@ -5,121 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Adventure Sheet</title>
 <style>
-  :root{
-    --bg:#15110d; --panel:#f1dfb9; --panel2:#ead1a0; --ink:#24170f; --muted:#6d5239;
-    --accent:#7c3f1d; --good:#1f6b3a; --bad:#9b2f22; --line:#5a3824;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(circle at top,#352417,#15110d 55%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:12px;}
-  .wrap{max-width:980px;margin:0 auto 80px;}
-  header{color:#f7e6c1;text-align:center;margin:6px 0 12px;}
-  h1{font-size:1.55rem;margin:.2rem 0;letter-spacing:.06em;text-transform:uppercase}
-  .subtitle{font-size:.92rem;color:#dcc69e}
-  .tabs{display:flex;gap:8px;position:sticky;top:0;z-index:5;background:rgba(21,17,13,.94);padding:8px 0;}
-  .tab{flex:1;border:1px solid #9f8059;background:#2b1b11;color:#f7e6c1;border-radius:10px;padding:10px 8px;font-weight:700;}
-  .tab.active{background:var(--accent)}
-  section{display:none}.show{display:block}
-  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:2px solid var(--line);border-radius:14px;padding:12px;margin:10px 0;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-  h2{margin:0 0 10px;font-size:1.05rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid rgba(90,56,36,.35);padding-bottom:6px}
-  h3{margin:8px 0 6px;font-size:.98rem;color:var(--muted)}
-  label{display:block;font-size:.78rem;font-weight:800;text-transform:uppercase;color:#4a301f;margin-bottom:4px;letter-spacing:.04em}
-  input,textarea,select{width:100%;border:1.5px solid #6b442d;border-radius:9px;background:#fff7e7;color:var(--ink);padding:10px;font-size:16px;}
-  textarea{min-height:88px;resize:vertical;line-height:1.35}.bigarea{min-height:160px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .stat{display:grid;grid-template-columns:1fr 84px 84px;gap:8px;align-items:end}.stat label{grid-column:1/-1}.small{font-size:.76rem;color:var(--muted);font-weight:700}
-  button{border:0;border-radius:10px;padding:11px 10px;font-weight:800;font-size:.95rem;background:#5b3420;color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.28)}
-  button.secondary{background:#806044}.good{background:var(--good)}.bad{background:var(--bad)}.wide{width:100%}.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1;min-width:120px}
-  .result{background:#fff7e7;border:1.5px dashed #6b442d;border-radius:10px;padding:10px;margin-top:8px;min-height:44px;font-weight:700;white-space:pre-wrap}
-  .monster{border:1.5px solid #6b442d;border-radius:12px;padding:10px;background:rgba(255,247,231,.55);margin-bottom:10px}
-  .monsterHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}.monsterHead strong{font-size:.9rem;color:#4a301f}.monsterHead button{padding:7px 9px;font-size:.78rem;flex:0 0 auto}
-  .footerbar{position:fixed;left:0;right:0;bottom:0;background:#21150e;border-top:1px solid #7b5b3a;padding:8px 12px;display:flex;gap:8px;z-index:10}.footerbar button{flex:1}.danger{background:#7b1f17}.okline{color:var(--good)}.badline{color:var(--bad)}
-  @media (min-width:760px){body{padding:22px}.layout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{margin:0 0 14px}.tabs{position:static}.footerbar{max-width:980px;margin:0 auto;left:0;right:0;border-radius:14px 14px 0 0}}
+:root{
+  --bg:#17110b;--panel:#2b1b10;--panel2:#3b2718;--ink:#f7e7c7;--muted:#caa875;--gold:#f4c542;--danger:#e85d3f;--good:#6ee27a;--line:#79502f;
+}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 30% 0,#3a2415,#15100b 55%,#080604);color:var(--ink);min-height:100vh;padding:14px;}
+.app{max-width:980px;margin:0 auto}.hero{border:2px solid #8e6037;border-radius:22px;padding:18px 16px;margin-bottom:14px;background:linear-gradient(180deg,#4a301d,#26180f);box-shadow:0 10px 30px #0008,inset 0 0 35px #0005;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:-30px;background:radial-gradient(circle at 20% 20%,#fff2,transparent 25%),radial-gradient(circle at 80% 0,#f4c54222,transparent 22%);pointer-events:none}.title{font-family:Georgia,serif;font-weight:900;font-size:clamp(32px,8vw,58px);letter-spacing:.03em;text-align:center;text-shadow:0 4px 0 #000;margin:0}.subtitle{text-align:center;color:var(--muted);font-weight:700;letter-spacing:.12em;margin-top:2px}.tabs{display:flex;gap:8px;position:sticky;top:0;z-index:4;background:#17110bdd;backdrop-filter:blur(8px);padding:8px 0;margin-bottom:12px}.tab{flex:1;border:1px solid #8e6037;background:#2a1a10;color:var(--ink);border-radius:14px;padding:12px 6px;font-weight:800}.tab.active{background:linear-gradient(#805226,#4b2e17);color:#fff;box-shadow:0 0 12px #f4c54244}.grid{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:820px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}}
+.card{background:linear-gradient(180deg,var(--panel),#1d130c);border:1px solid #765034;border-radius:18px;padding:14px;box-shadow:0 8px 18px #0007}.card h2,.card h3{margin:0 0 10px;font-family:Georgia,serif}.row{display:flex;gap:8px;align-items:center;margin:8px 0}.row label{width:92px;color:var(--muted);font-weight:800}input,textarea,select{width:100%;background:#120c08;color:var(--ink);border:1px solid #8e6037;border-radius:12px;padding:11px;font-size:16px;outline:none}textarea{min-height:92px;resize:vertical}.stat{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}.stat label{display:block;color:var(--muted);font-weight:900;margin-bottom:4px}.small{font-size:12px;color:var(--muted)}button{touch-action:manipulation;border:0;border-radius:14px;padding:12px 14px;background:linear-gradient(#8b5a2b,#573319);color:white;font-weight:900;box-shadow:0 4px 0 #24150c}button:active{transform:translateY(3px);box-shadow:0 1px 0 #24150c}.btn-good{background:linear-gradient(#4a9e4f,#286d2d)}.btn-bad{background:linear-gradient(#bd513c,#7e261a)}.btn-gold{background:linear-gradient(#f4c542,#b77a16);color:#261407}.btn-wide{width:100%;margin-top:8px}.dice-stage{display:flex;justify-content:center;align-items:center;gap:16px;min-height:145px;padding:12px;background:radial-gradient(circle,#3e2818,#150e09);border-radius:18px;border:1px solid #7b5637;perspective:600px}.die{width:74px;height:74px;border-radius:16px;background:#fff;color:#111;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:10px;box-shadow:inset -10px -12px 0 #ddd,0 10px 22px #0009;border:2px solid #eee}.pip{width:13px;height:13px;border-radius:50%;background:#111;align-self:center;justify-self:center}.roll .die{animation:tumble .65s cubic-bezier(.2,.9,.3,1.1)}@keyframes tumble{0%{transform:rotateX(0) rotateY(0) scale(1)}35%{transform:rotateX(260deg) rotateY(180deg) scale(1.2)}70%{transform:rotateX(520deg) rotateY(390deg) scale(.92)}100%{transform:rotateX(720deg) rotateY(720deg) scale(1)}}.result{text-align:center;font-size:34px;font-weight:1000;color:var(--gold);text-shadow:0 3px 0 #000;margin:10px 0}.log{max-height:170px;overflow:auto;font-size:14px;color:#ead0a4;background:#120c08;border:1px solid #6d482b;border-radius:12px;padding:10px}.monster{display:grid;grid-template-columns:1fr 76px 76px;gap:8px;margin-bottom:8px}.monster input{padding:9px}.hidden{display:none}.spark{position:fixed;left:50%;top:50%;font-size:24px;pointer-events:none;animation:pop 900ms ease-out forwards;z-index:99}@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(.2) rotate(180deg);opacity:0}}.footer{display:flex;gap:8px;margin:14px 0 30px}.footer button{flex:1}.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#000d;color:white;border:1px solid #f4c542;border-radius:16px;padding:10px 14px;z-index:20;opacity:0;transition:.2s}.toast.show{opacity:1}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header><h1>Adventure Sheet</h1><div class="subtitle">Phone-friendly, autosaving character sheet and dice roller</div></header>
-<nav class="tabs">
-  <button class="tab active" data-tab="sheet">Sheet</button>
-  <button class="tab" data-tab="monsters">Monsters</button>
-  <button class="tab" data-tab="dice">Dice</button>
-  <button class="tab" data-tab="rules">Help</button>
-</nav>
+<div class="app">
+  <section class="hero"><h1 class="title">Adventure Sheet</h1><div class="subtitle">Dungeon tracker and dice roller</div></section>
+  <nav class="tabs"><button class="tab active" data-tab="sheet">Hero</button><button class="tab" data-tab="dice">Dice</button><button class="tab" data-tab="monsters">Monsters</button><button class="tab" data-tab="rules">Rules</button></nav>
 
-<section id="sheet" class="show">
-  <div class="layout">
-    <div class="card">
-      <h2>Character</h2>
-      <div class="stat"><label>Skill</label><input id="skill" type="number" inputmode="numeric"><input id="skillMax" type="number" inputmode="numeric" placeholder="Initial"></div>
-      <div class="stat"><label>Stamina</label><input id="stamina" type="number" inputmode="numeric"><input id="staminaMax" type="number" inputmode="numeric" placeholder="Initial"></div>
-      <div class="stat"><label>Luck</label><input id="luck" type="number" inputmode="numeric"><input id="luckMax" type="number" inputmode="numeric" placeholder="Initial"></div>
-      <p class="small">Left box is current score. Right box is Initial score.</p>
-      <div class="row"><button onclick="newHero()">Roll new hero</button><button class="secondary" onclick="restoreAll()">Restore to Initial</button></div>
-      <div id="heroResult" class="result"></div>
+  <section id="sheet" class="screen">
+    <div class="grid two">
+      <div class="card"><h2>Hero Scores</h2>
+        <div class="stat"><div><label>Skill</label><input id="skill" type="number"></div><div><label>Initial</label><input id="skillMax" type="number"></div><button data-adj="skill">-1</button></div>
+        <div class="stat"><div><label>Stamina</label><input id="stamina" type="number"></div><div><label>Initial</label><input id="staminaMax" type="number"></div><button data-adj="stamina">-1</button></div>
+        <div class="stat"><div><label>Luck</label><input id="luck" type="number"></div><div><label>Initial</label><input id="luckMax" type="number"></div><button data-adj="luck">-1</button></div>
+        <button class="btn-gold btn-wide" id="rollHero">Roll new hero</button>
+        <button class="btn-good btn-wide" id="eatMeal">Eat provisions, +4 stamina</button>
+      </div>
+      <div class="card"><h2>Pack</h2>
+        <div class="row"><label>Gold</label><input id="gold" type="number"></div>
+        <div class="row"><label>Provisions</label><input id="provisions" type="number"></div>
+        <label class="small">Equipment</label><textarea id="equipment"></textarea>
+        <label class="small">Treasure</label><textarea id="treasure"></textarea>
+      </div>
     </div>
-    <div class="card">
-      <h2>Quick actions</h2>
-      <div class="row"><button onclick="testLuck()">Test Luck</button><button onclick="eatMeal()">Eat Meal</button></div>
-      <div class="row"><button onclick="changeStat('stamina',-2)" class="bad">Take 2 Damage</button><button onclick="changeStat('stamina',2)" class="good">Heal 2</button></div>
-      <div class="row"><button onclick="changeStat('skill',-1)" class="bad">Skill -1</button><button onclick="changeStat('luck',1)" class="good">Luck +1</button></div>
-      <div id="quickResult" class="result"></div>
+  </section>
+
+  <section id="dice" class="screen hidden">
+    <div class="card"><h2>Animated Dice</h2>
+      <div id="diceStage" class="dice-stage"><div class="die" id="die1"></div><div class="die" id="die2"></div></div>
+      <div class="result" id="result">Tap to roll</div>
+      <div class="grid three"><button id="roll1">Roll 1D6</button><button id="roll2">Roll 2D6</button><button class="btn-gold" id="testLuck">Test Luck</button></div>
+      <div class="log" id="log"></div>
     </div>
-  </div>
-  <div class="layout">
-    <div class="card"><h2>Equipment</h2><textarea id="equipment" class="bigarea" placeholder="Sword, leather armour, shield, backpack..."></textarea></div>
-    <div>
-      <div class="card"><h2>Gold</h2><input id="gold" type="number" inputmode="numeric"></div>
-      <div class="card"><h2>Treasure</h2><textarea id="treasure"></textarea></div>
-      <div class="card"><h2>Provisions</h2><input id="provisions" type="number" inputmode="numeric" placeholder="10"><div class="row" style="margin-top:8px"><button onclick="setVal('provisions',10)">Set to 10</button></div></div>
+    <div class="card"><h3>Combat Helper</h3>
+      <div class="row"><label>Monster</label><select id="activeMonster"></select></div>
+      <button class="btn-wide" id="attackRound">Roll attack round</button>
+      <div class="small">Compares 2D6 + current Skill against 2D6 + monster Skill.</div>
     </div>
-  </div>
-  <div class="card"><h2>Potion</h2><select id="potion"><option value="">No potion selected</option><option>Potion of Skill</option><option>Potion of Strength</option><option>Potion of Fortune</option></select><div class="row" style="margin-top:8px"><button onclick="usePotion()">Use Potion</button></div><div id="potionResult" class="result"></div></div>
-  <div class="card"><h2>Notes and map references</h2><textarea id="notes" class="bigarea" placeholder="Room notes, keys found, route, traps, map notes..."></textarea></div>
-</section>
+  </section>
 
-<section id="monsters">
-  <div class="card"><h2>Combat helper</h2><p class="small">Pick a monster slot, then roll an attack round. The app does the dice and attack strength comparison. You still choose whether to use Luck.</p><div class="grid"><select id="activeMonster"></select><button onclick="attackRound()">Roll attack round</button></div><div id="combatResult" class="result"></div><div class="row"><button class="good" onclick="luckAfterHit('hero')">Luck: I wounded it</button><button class="bad" onclick="luckAfterHit('monster')">Luck: it wounded me</button></div></div>
-  <div id="monsterList"></div>
-</section>
+  <section id="monsters" class="screen hidden"><div class="card"><h2>Monster Encounters</h2><div id="monsterList"></div></div></section>
 
-<section id="dice">
-  <div class="card"><h2>Dice roller</h2><div class="grid4"><button onclick="rollDice(1)">1D6</button><button onclick="rollDice(2)">2D6</button><button onclick="rollDice(3)">3D6</button><button onclick="rollDice(4)">4D6</button></div><div class="grid" style="margin-top:10px"><input id="customDice" type="number" inputmode="numeric" value="2" min="1"><button onclick="rollDice(Number(document.getElementById('customDice').value||1))">Roll custom D6</button></div><div id="diceResult" class="result"></div></div>
-</section>
+  <section id="rules" class="screen hidden"><div class="card"><h2>Quick Rules</h2>
+    <p>Initial Skill: 1D6 + 6. Initial Stamina: 2D6 + 12. Initial Luck: 1D6 + 6.</p>
+    <p>Attack round: roll 2D6 + Skill for both sides. Higher score wounds the other side for 2 Stamina. A draw means both miss.</p>
+    <p>Test Luck: roll 2D6. Equal to or less than current Luck is lucky. After every test, reduce Luck by 1.</p>
+    <p>Provisions: start with 10. Eating one meal restores 4 Stamina, but not above initial Stamina.</p>
+  </div></section>
 
-<section id="rules">
-  <div class="card"><h2>Built-in rule reminders</h2><p><strong>Initial scores:</strong> Skill is 1D6 + 6. Stamina is 2D6 + 12. Luck is 1D6 + 6.</p><p><strong>Attack round:</strong> Monster rolls 2D6 + Skill. You roll 2D6 + current Skill. Higher attack strength wounds the other side for 2 Stamina. A draw means both miss.</p><p><strong>Test Luck:</strong> Roll 2D6. Equal to or less than current Luck is lucky. Higher is unlucky. Luck drops by 1 after every test.</p><p><strong>Provisions:</strong> Eating one meal restores 4 Stamina, cannot exceed Initial Stamina, and reduces provisions by 1.</p><p><strong>Potions:</strong> Skill restores Skill. Strength restores Stamina. Fortune adds 1 to Initial Luck, then restores Luck to that new value.</p></div>
-</section>
-</div>
-
-<div class="footerbar"><button onclick="saveNow()">Save</button><button class="secondary" onclick="exportSave()">Export</button><button class="secondary" onclick="importSave()">Import</button><button class="danger" onclick="resetAll()">Reset</button></div>
-
+  <div class="footer"><button id="saveNow">Save</button><button class="btn-bad" id="resetAll">Reset</button></div>
+</div><div class="toast" id="toast">Saved</div>
 <script>
-const KEY='adventureSheetV2';
-const ids=['skill','skillMax','stamina','staminaMax','luck','luckMax','equipment','gold','treasure','provisions','potion','notes'];
-let state={monsters:Array.from({length:12},()=>({name:'',skill:'',stamina:''})),lastCombat:null};
-function d6(){return Math.floor(Math.random()*6)+1} function sum(n){let r=[];for(let i=0;i<n;i++)r.push(d6());return {rolls:r,total:r.reduce((a,b)=>a+b,0)}}
-function by(id){return document.getElementById(id)} function num(id){return Number(by(id).value||0)} function setVal(id,v){by(id).value=v;saveNow(false)}
-function saveNow(show=true){ids.forEach(id=>state[id]=by(id).value);document.querySelectorAll('[data-m]').forEach(el=>{let [i,k]=el.dataset.m.split('.');state.monsters[Number(i)][k]=el.value});localStorage.setItem(KEY,JSON.stringify(state));if(show) flash('quickResult','Saved on this device.');}
-function load(){let raw=localStorage.getItem(KEY);if(raw){try{state={...state,...JSON.parse(raw)}}catch(e){}} ids.forEach(id=>{if(state[id]!==undefined)by(id).value=state[id]}); renderMonsters();}
-function renderMonsters(){const list=by('monsterList');const sel=by('activeMonster');list.innerHTML='';sel.innerHTML='';state.monsters.forEach((m,i)=>{sel.insertAdjacentHTML('beforeend',`<option value="${i}">Monster ${i+1}${m.name?' - '+esc(m.name):''}</option>`);list.insertAdjacentHTML('beforeend',`<div class="monster"><div class="monsterHead"><strong>Monster ${i+1}</strong><button class="secondary" onclick="clearMonster(${i})">Clear</button></div><div><label>Monster</label><input data-m="${i}.name" value="${esc(m.name)}" placeholder="Name"></div><div class="grid"><div><label>Skill</label><input data-m="${i}.skill" type="number" inputmode="numeric" value="${esc(m.skill)}"></div><div><label>Stamina</label><input data-m="${i}.stamina" type="number" inputmode="numeric" value="${esc(m.stamina)}"></div></div></div>`)});document.querySelectorAll('[data-m]').forEach(el=>el.addEventListener('input',()=>saveNow(false)))}
-function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-ids.forEach(id=>setTimeout(()=>by(id)?.addEventListener('input',()=>saveNow(false)),0));
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('section').forEach(s=>s.classList.remove('show'));by(t.dataset.tab).classList.add('show')});
-function flash(id,msg){by(id).textContent=msg}
-function changeStat(id,delta){let maxId=id+'Max';let v=num(id)+delta;if(delta>0 && by(maxId))v=Math.min(v,num(maxId)||v);by(id).value=Math.max(0,v);saveNow(false);flash('quickResult',`${id[0].toUpperCase()+id.slice(1)} is now ${by(id).value}.`)}
-function newHero(){let sk=sum(1), st=sum(2), lu=sum(1);by('skill').value=by('skillMax').value=sk.total+6;by('stamina').value=by('staminaMax').value=st.total+12;by('luck').value=by('luckMax').value=lu.total+6;if(!by('provisions').value)by('provisions').value=10;if(!by('equipment').value)by('equipment').value='Sword\nLeather armour\nShield\nBackpack';saveNow(false);flash('heroResult',`Skill: ${sk.rolls[0]} + 6 = ${num('skill')}\nStamina: ${st.rolls.join(' + ')} + 12 = ${num('stamina')}\nLuck: ${lu.rolls[0]} + 6 = ${num('luck')}`)}
-function restoreAll(){['skill','stamina','luck'].forEach(id=>by(id).value=num(id+'Max'));saveNow(false);flash('heroResult','Skill, Stamina and Luck restored to Initial values.');}
-function testLuck(){let r=sum(2), before=num('luck'), lucky=r.total<=before;by('luck').value=Math.max(0,before-1);saveNow(false);flash('quickResult',`Rolled ${r.rolls.join(' + ')} = ${r.total}. ${lucky?'Lucky':'Unlucky'}.\nLuck reduced from ${before} to ${by('luck').value}.`);return lucky}
-function eatMeal(){let p=num('provisions');if(p<=0){flash('quickResult','No provisions left.');return}by('provisions').value=p-1;by('stamina').value=Math.min(num('staminaMax')||999,num('stamina')+4);saveNow(false);flash('quickResult',`Meal eaten. Stamina is now ${num('stamina')}. Provisions left: ${num('provisions')}.`)}
-function usePotion(){let p=by('potion').value;if(!p){flash('potionResult','No potion selected.');return}if(p.includes('Skill')) by('skill').value=num('skillMax');if(p.includes('Strength')) by('stamina').value=num('staminaMax');if(p.includes('Fortune')){by('luckMax').value=num('luckMax')+1;by('luck').value=num('luckMax')}by('potion').value='';saveNow(false);flash('potionResult',`${p} used.`)}
-function rollDice(n){n=Math.max(1,Math.min(20,n));let r=sum(n);flash('diceResult',`${n}D6: ${r.rolls.join(' + ')} = ${r.total}`)}
-function attackRound(){saveNow(false);let i=Number(by('activeMonster').value),m=state.monsters[i];if(!m||!Number(m.skill)||!Number(m.stamina)){flash('combatResult','Enter the selected monster Skill and Stamina first.');return}let mr=sum(2),hr=sum(2);let ma=mr.total+Number(m.skill),ha=hr.total+num('skill');let text=`${m.name||'Monster'} attack: ${mr.rolls.join(' + ')} + ${m.skill} = ${ma}\nYour attack: ${hr.rolls.join(' + ')} + ${num('skill')} = ${ha}\n`;if(ha>ma){m.stamina=String(Math.max(0,Number(m.stamina)-2));text+=`You wound it. Monster Stamina is now ${m.stamina}.`;state.lastCombat={winner:'hero',monster:i};}else if(ma>ha){by('stamina').value=Math.max(0,num('stamina')-2);text+=`It wounds you. Your Stamina is now ${num('stamina')}.`;state.lastCombat={winner:'monster',monster:i};}else{text+='Both miss.';state.lastCombat=null}saveNow(false);renderMonsters();by('activeMonster').value=i;flash('combatResult',text)}
-function luckAfterHit(type){if(!state.lastCombat||state.lastCombat.winner!==type){flash('combatResult','Use this immediately after a matching wound result.');return}let i=state.lastCombat.monster,m=state.monsters[i];let before=num('luck'),r=sum(2),lucky=r.total<=before;by('luck').value=Math.max(0,before-1);let text=`Luck roll: ${r.rolls.join(' + ')} = ${r.total}. ${lucky?'Lucky':'Unlucky'}.\n`;if(type==='hero'){m.stamina=String(Math.max(0,Number(m.stamina)+(lucky?-2:1)));text+=lucky?`Extra damage. Monster Stamina now ${m.stamina}.`:`Damage reduced. Monster Stamina now ${m.stamina}.`;}else{by('stamina').value=Math.max(0,num('stamina')+(lucky?1:-1));text+=lucky?`Damage reduced. Your Stamina now ${num('stamina')}.`:`Extra damage. Your Stamina now ${num('stamina')}.`;}state.lastCombat=null;saveNow(false);renderMonsters();by('activeMonster').value=i;flash('combatResult',text)}
-function clearMonster(i){state.monsters[i]={name:'',skill:'',stamina:''};saveNow(false);renderMonsters()}
-function exportSave(){saveNow(false);navigator.clipboard?.writeText(localStorage.getItem(KEY));flash('quickResult','Save data copied to clipboard. Keep it somewhere safe if you want a backup.');}
-function importSave(){let raw=prompt('Paste exported save data:');if(!raw)return;try{localStorage.setItem(KEY,raw);load();flash('quickResult','Save imported.')}catch(e){alert('That save data was not valid.')}}
-function resetAll(){if(confirm('Clear this adventure sheet on this device?')){localStorage.removeItem(KEY);location.reload()}}
-load();
+const ids=['skill','skillMax','stamina','staminaMax','luck','luckMax','gold','provisions','equipment','treasure'];
+const state={monsters:Array.from({length:12},()=>({name:'',skill:'',stamina:''})),log:[]};
+const $=id=>document.getElementById(id);
+function save(){ids.forEach(id=>state[id]=$(id).value);localStorage.setItem('adventureSheetKid',JSON.stringify(state));}
+function load(){const raw=localStorage.getItem('adventureSheetKid'); if(raw) Object.assign(state,JSON.parse(raw)); ids.forEach(id=>{if(state[id]!==undefined)$(id).value=state[id]}); renderMonsters(); renderLog();}
+function toast(t='Saved'){const el=$('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),900)}
+function rnd(){return Math.floor(Math.random()*6)+1}
+function pips(n){const map={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};return Array.from({length:9},(_,i)=>map[n].includes(i)?'<span class="pip"></span>':'<span></span>').join('')}
+function setDice(a,b){$('die1').innerHTML=pips(a);$('die2').style.display=b? 'grid':'none'; if(b)$('die2').innerHTML=pips(b)}
+function burst(){for(let i=0;i<18;i++){const s=document.createElement('div');s.className='spark';s.textContent=['✦','★','⚔','♦'][i%4];s.style.setProperty('--x',(Math.random()*260-130)+'px');s.style.setProperty('--y',(Math.random()*-220-20)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),900)}}
+function roll(count,label){$('diceStage').classList.remove('roll');void $('diceStage').offsetWidth;$('diceStage').classList.add('roll');const a=rnd(),b=count>1?rnd():0;setTimeout(()=>{setDice(a,b);const total=a+b;$('result').textContent=`${label}: ${total}`;state.log.unshift(`${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}  ${label}: ${total}${b?` (${a}+${b})`:''}`);state.log=state.log.slice(0,30);renderLog();save();burst()},450);return a+b}
+function renderLog(){$('log').innerHTML=(state.log||[]).join('<br>')}
+function renderMonsters(){const list=$('monsterList'); list.innerHTML=''; const sel=$('activeMonster'); sel.innerHTML=''; state.monsters.forEach((m,i)=>{list.insertAdjacentHTML('beforeend',`<div class="monster"><input placeholder="Monster ${i+1}" value="${m.name||''}" data-mi="${i}" data-k="name"><input type="number" placeholder="Skill" value="${m.skill||''}" data-mi="${i}" data-k="skill"><input type="number" placeholder="Stam." value="${m.stamina||''}" data-mi="${i}" data-k="stamina"></div>`); sel.insertAdjacentHTML('beforeend',`<option value="${i}">${m.name||'Monster '+(i+1)}</option>`)});}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden')});
+ids.forEach(id=>$(id).addEventListener('input',save));
+document.addEventListener('input',e=>{if(e.target.dataset.mi){state.monsters[e.target.dataset.mi][e.target.dataset.k]=e.target.value;save();renderMonsters();}});
+$('roll1').onclick=()=>roll(1,'1D6'); $('roll2').onclick=()=>roll(2,'2D6');
+$('rollHero').onclick=()=>{const sk=rnd()+6, st=rnd()+rnd()+12, lu=rnd()+6; $('skill').value=$('skillMax').value=sk; $('stamina').value=$('staminaMax').value=st; $('luck').value=$('luckMax').value=lu; $('provisions').value=10; save(); toast('Hero rolled'); burst();}
+$('testLuck').onclick=()=>{const current=Number($('luck').value||0);const total=roll(2,'Test Luck');setTimeout(()=>{const lucky=total<=current;$('result').textContent=lucky?'Lucky!':'Unlucky!';$('luck').value=Math.max(0,current-1);state.log.unshift(`${lucky?'Lucky':'Unlucky'} against Luck ${current}; Luck now ${$('luck').value}`);renderLog();save();burst()},500)};
+$('eatMeal').onclick=()=>{let p=Number($('provisions').value||0),s=Number($('stamina').value||0),m=Number($('staminaMax').value||0); if(p<=0)return toast('No provisions left'); $('provisions').value=p-1; $('stamina').value=Math.min(m,s+4); save(); toast('Meal eaten');}
+document.querySelectorAll('[data-adj]').forEach(b=>b.onclick=()=>{const id=b.dataset.adj;$(id).value=Math.max(0,Number($(id).value||0)-1);save();});
+$('attackRound').onclick=()=>{const i=Number($('activeMonster').value),m=state.monsters[i]; if(!m||!m.skill)return toast('Pick a monster with Skill'); const hero=rnd()+rnd()+Number($('skill').value||0), mon=rnd()+rnd()+Number(m.skill||0); setDice((hero-Number($('skill').value||0)+1)/2|0,0); let msg=`You ${hero} vs ${m.name||'Monster'} ${mon}. `; if(hero>mon){m.stamina=Math.max(0,Number(m.stamina||0)-2);msg+='You wound it.'} else if(mon>hero){$('stamina').value=Math.max(0,Number($('stamina').value||0)-2);msg+='It wounds you.'} else msg+='Both miss.'; state.log.unshift(msg); renderMonsters();renderLog();save();$('result').textContent=msg;burst();}
+$('saveNow').onclick=()=>{save();toast('Saved')}; $('resetAll').onclick=()=>{if(confirm('Clear this adventure?')){localStorage.removeItem('adventureSheetKid');location.reload()}};
+setDice(1,6); load();
 </script>
 </body>
 </html>
